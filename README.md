@@ -6,6 +6,7 @@ The goal is to help the user understand what are the priority for buying a house
 
 # What's needed
 * API from zillow to property information. Or other alternative free sources. 
+  * Zillow API is nolonger available. Use rapidapi.com. Limit 50 per month
 * Find properties that are avaiable on the market with real data. Or collect historical data around the same time for comparison. Date when on market is important here for budget comparison. 
 * Detailed info about school distric info. Need to calculate distance to work if that's needed. Distance to after school activties if that's an important factor. 
 * 
