@@ -40,12 +40,22 @@ def filter_houses(data_dict: Dict,
     return wanted_df
 
 
-def find_my_houses(data: Dict):
+def find_my_houses(data: Dict, 
+                   bedroom_min_size: int,
+                   bathroom_min_size: int,
+                   price_min: int,
+                   price_max: int
+                   ):
+    logger.info(data)
     results = BasicResults(**data)
     logger.info(f"result count {len(results.results)}")
 
     result_dicts = [x.model_dump() for x in results.results]
-    data_df = filter_houses(data_dict=result_dicts)
+    data_df = filter_houses(data_dict=result_dicts,
+                            bedroom_min_size=bedroom_min_size,
+                            bathroom_min_size=bathroom_min_size,
+                            price_min=price_min,
+                            price_max=price_max)
 
     return data_df
 

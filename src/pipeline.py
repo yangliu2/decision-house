@@ -2,6 +2,7 @@
 
 import typer
 from loguru import logger
+from typing import List
 from src.pull_data import search_house, get_detail
 from src.filter_results import find_my_houses
 from src.detailed_results import get_detailed_info, is_good_school
@@ -9,13 +10,20 @@ from src.detailed_results import get_detailed_info, is_good_school
 app = typer.Typer()
 
 
-@app.command()
-def main(zipcode: str):
+def get_house(zipcode: str,
+              bedroom_min_size: int,
+              bathroom_min_size: int,
+              price_min: int,
+              price_max: int) -> List:
     logger.info(f"Looking for houses in zipcode: {zipcode}")
     search_results = search_house(location=zipcode)
     
     logger.info(f"Filtering houses according to default parameters")
-    my_houses_df = find_my_houses(data=search_results)
+    my_houses_df = find_my_houses(data=search_results,
+                                  bedroom_min_size=bedroom_min_size,
+                                  bathroom_min_size=bathroom_min_size,
+                                  price_min=price_min,
+                                  price_max=price_max)
     print(my_houses_df)
     
     logger.info(f"Get detailed info for each of the results")
@@ -25,9 +33,16 @@ def main(zipcode: str):
         detailed_result = get_detail(zpid=zpid)
         details = get_detailed_info(data=detailed_result)
         if is_good_school(results=details):
-            houses_with_schools.append(zpid)
-        
-    print(houses_with_schools)
+            url = details.hdpUrl
+            houses_with_schools.append(f"https://www.zillow.com{url}")
+            
+    return houses_with_schools
+
+@app.command()
+def main(zipcode: str):
+
+    houses = get_house(zipcode=zipcode)
+    print(houses)
 
 if __name__ == "__main__":
     app()

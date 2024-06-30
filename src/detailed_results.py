@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Dict, Tuple
+from typing import List, Dict, Tuple, Optional
 from pathlib import Path
 from loguru import logger
 import json
@@ -22,8 +22,8 @@ class ComparableAddress(BaseModel):
 
 class Comparables(BaseModel):
     address: ComparableAddress
-    bathrooms: int
-    bedrooms: int
+    bathrooms: float
+    bedrooms: Optional[float]
     livingArea: int
     price: int
     zpid: int
@@ -55,6 +55,7 @@ class Schools(BaseModel):
 
 class DetailResults (BaseModel):
     hugePhotos: List[Pictures]
+    hdpUrl: str
     comps: List[Comparables]
     description: str
     favoriteCount: int
