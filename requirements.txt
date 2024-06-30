@@ -1,0 +1,7 @@
+streamlit
+typer
+pydantic
+pandas
+loguru
+requests_cache
+python-dotenv
