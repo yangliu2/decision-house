@@ -76,7 +76,7 @@ def find_my_houses(data: Dict,
     :return: filtered pandas dataframe 
     :rtype: pd.Dataframe
     """
-    logger.info(data)
+    # logger.info(data)
     results = BasicResults(**data)
     logger.info(f"result count {len(results.results)}")
 

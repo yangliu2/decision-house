@@ -33,15 +33,15 @@ class Comparables(BaseModel):
 class Features(BaseModel):
     appliances: List[str]
     # associationFee: str
-    bathroomsFull: int
-    bathroomsHalf: int
+    bathroomsFull: Optional[int]
+    bathroomsHalf: Optional[int]
     communityFeatures: List[str]
     daysOnZillow: int
     flooring: List[str]
     # hoaFee: str
     interiorFeatures: List[str]
     lotFeatures: List[str]
-    poolFeatures: List[str]
+    poolFeatures: Optional[List[str]]
     utilities: List[str]
 
 
