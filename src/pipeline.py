@@ -3,6 +3,7 @@
 import typer
 from loguru import logger
 from typing import List
+from typing import Optional
 from src.pull_data import search_house, get_detail
 from src.filter_results import find_my_houses
 from src.detailed_results import get_detailed_info, is_good_school
@@ -14,7 +15,9 @@ def get_house(zipcode: str,
               bedroom_min_size: int,
               bathroom_min_size: int,
               price_min: int,
-              price_max: int) -> List:
+              price_max: int,
+              min_school_rating: int,
+              desired_school: Optional[str] = None) -> List:
     logger.info(f"Looking for houses in zipcode: {zipcode}")
     search_results = search_house(location=zipcode)
     
@@ -32,7 +35,9 @@ def get_house(zipcode: str,
         zpid = row['zpid']
         detailed_result = get_detail(zpid=zpid)
         details = get_detailed_info(data=detailed_result)
-        if is_good_school(results=details):
+        if is_good_school(results=details, 
+                          min_rating=min_school_rating,
+                          desired_schools=(desired_school,)):
             url = details.hdpUrl
             houses_with_schools.append(f"https://www.zillow.com{url}")
             

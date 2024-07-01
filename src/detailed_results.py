@@ -69,8 +69,8 @@ class DetailResults (BaseModel):
 
 
 def is_good_school(results: Dict,
-                   min_rating: int = 7,
-                   desired_schools: Tuple[str] = ("Westwood High School")) -> bool:
+                   min_rating: int,
+                   desired_schools: Tuple[str]) -> bool:
     schools = results.schools
     ratings = [x.rating for x in schools]
     logger.info(f"ratings are {ratings}")
