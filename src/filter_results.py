@@ -28,7 +28,22 @@ def filter_houses(data_dict: Dict,
                   bedroom_min_size: int = 4,
                   bathroom_min_size: int = 3,
                   price_min: int = 800_000,
-                  price_max: int = 1_150_000):
+                  price_max: int = 1_150_000) -> pd.DataFrame:
+    """ Filter initial search to only match the parameters
+
+    :param data_dict: intial search returned API dictionary
+    :type data_dict: Dict
+    :param bedroom_min_size: min bedroom size, defaults to 4
+    :type bedroom_min_size: int, optional
+    :param bathroom_min_size: min bathroom size, defaults to 3
+    :type bathroom_min_size: int, optional
+    :param price_min: min price, defaults to 800_000
+    :type price_min: int, optional
+    :param price_max: max price, defaults to 1_150_000
+    :type price_max: int, optional
+    :return: filtered dataframe with 
+    :rtype: pd.DataFrame
+    """
 
     data_df = pd.DataFrame(data=data_dict)
 
@@ -45,7 +60,22 @@ def find_my_houses(data: Dict,
                    bathroom_min_size: int,
                    price_min: int,
                    price_max: int
-                   ):
+                   ) -> pd.DataFrame:
+    """ Find house target based on filters
+
+    :param data: API returned search results
+    :type data: Dict
+    :param bedroom_min_size: min bedroom size
+    :type bedroom_min_size: int
+    :param bathroom_min_size: min bathroom size
+    :type bathroom_min_size: int
+    :param price_min: min price
+    :type price_min: int
+    :param price_max: max price
+    :type price_max: int
+    :return: filtered pandas dataframe 
+    :rtype: pd.Dataframe
+    """
     logger.info(data)
     results = BasicResults(**data)
     logger.info(f"result count {len(results.results)}")

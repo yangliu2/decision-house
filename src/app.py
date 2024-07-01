@@ -1,9 +1,11 @@
+""" Streamlit UI for interaction """
 import streamlit as st
 from typing import Dict
 from pipeline import get_house
 
 
 def display_page() -> Dict:
+    """" Streamlit website for UI interaction """
 
     data = {}
 
@@ -18,6 +20,7 @@ def display_page() -> Dict:
     st.markdown(
         """
         <style>
+        ! Make mobile friendly
         @media (max-width: 600px) {
             .main {
                 padding: 1rem;

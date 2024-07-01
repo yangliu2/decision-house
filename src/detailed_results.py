@@ -1,3 +1,4 @@
+""" Checking the detailed info for each house """
 from pydantic import BaseModel
 from typing import List, Dict, Tuple, Optional
 from pathlib import Path
@@ -88,6 +89,13 @@ def is_good_school(results: Dict,
 
 
 def get_detailed_info(data: Dict) -> Dict:
+    """Check the validity of detailed house information
+
+    :param data: dictionary returned from API service
+    :type data: Dict
+    :return: pydantic object after type checking
+    :rtype: Dict
+    """
     
     results = DetailResults(**data)
 

@@ -18,6 +18,25 @@ def get_house(zipcode: str,
               price_max: int,
               min_school_rating: int,
               desired_school: Optional[str] = None) -> List:
+    """Get house info based on filtered info
+
+    :param zipcode: zipcode as location
+    :type zipcode: str
+    :param bedroom_min_size: min bedroom size
+    :type bedroom_min_size: int
+    :param bathroom_min_size: min bathroom size
+    :type bathroom_min_size: int
+    :param price_min: min price
+    :type price_min: int
+    :param price_max: max price
+    :type price_max: int
+    :param min_school_rating: min school rating
+    :type min_school_rating: int
+    :param desired_school: one school that must be included, defaults to None
+    :type desired_school: Optional[str], optional
+    :return: list of houses after filtering
+    :rtype: List
+    """
     logger.info(f"Looking for houses in zipcode: {zipcode}")
     search_results = search_house(location=zipcode)
     
@@ -27,7 +46,7 @@ def get_house(zipcode: str,
                                   bathroom_min_size=bathroom_min_size,
                                   price_min=price_min,
                                   price_max=price_max)
-    print(my_houses_df)
+    # print(my_houses_df)
     
     logger.info(f"Get detailed info for each of the results")
     houses_with_schools = []

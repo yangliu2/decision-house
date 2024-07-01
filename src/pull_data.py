@@ -14,52 +14,66 @@ load_dotenv()
 
 
 def search_house(location: str) -> Dict:
-    time.sleep(1)
-    
-    url = os.getenv("RAPIDAPI_SEARCH_URL")
+	"""Initial search using zipcode as the location
 
-    querystring = {"location": location,
-                   "output": "json",
-                   "status": "forSale",
-                   "sortSelection": "priorityscore",
-                   "listing_type": "by_agent",
-                   "doz": "any"}
+	:param location: zipcode location
+	:type location: str
+	:return: result json as dictionary
+	:rtype: Dict
+	"""	
+	time.sleep(1)
 
-    headers = {
-        "x-rapidapi-key": os.getenv("RAPIDAPI_KEY"),
-        "x-rapidapi-host": os.getenv("RAPIDAPI_HOST")
-    }
+	url = os.getenv("RAPIDAPI_SEARCH_URL")
 
-    session = requests_cache.CachedSession("data/request_cache",
-                                           expire_after=3600)
+	querystring = {"location": location,
+					"output": "json",
+					"status": "forSale",
+					"sortSelection": "priorityscore",
+					"listing_type": "by_agent",
+					"doz": "any"}
 
-    response = session.get(url, headers=headers, params=querystring)
+	headers = {
+		"x-rapidapi-key": os.getenv("RAPIDAPI_KEY"),
+		"x-rapidapi-host": os.getenv("RAPIDAPI_HOST")
+	}
 
-    response_dict = response.json()
+	session = requests_cache.CachedSession("data/request_cache",
+											expire_after=3600)
 
-    return response_dict
+	response = session.get(url, headers=headers, params=querystring)
+
+	response_dict = response.json()
+
+	return response_dict
 
 
 def get_detail(zpid: str) -> Dict:
-    time.sleep(1)
-    
-    url = os.getenv("RAPIDAPI_PROPERTY_URL")
+	""" Get detailed data using zpid
 
-    querystring = {"zpid": zpid}
+	:param zpid: zillow zpid
+	:type zpid: str
+	:return: detailed house info in json dictionary
+	:rtype: Dict
+	"""
+	time.sleep(1)
 
-    headers = {
-        "x-rapidapi-key": os.getenv("RAPIDAPI_KEY"),
-        "x-rapidapi-host": os.getenv("RAPIDAPI_HOST")
-    }
+	url = os.getenv("RAPIDAPI_PROPERTY_URL")
 
-    session = requests_cache.CachedSession("data/request_cache",
-                                           expire_after=None)
+	querystring = {"zpid": zpid}
 
-    response = session.get(url, headers=headers, params=querystring)
+	headers = {
+		"x-rapidapi-key": os.getenv("RAPIDAPI_KEY"),
+		"x-rapidapi-host": os.getenv("RAPIDAPI_HOST")
+	}
 
-    response_dict = response.json()
+	session = requests_cache.CachedSession("data/request_cache",
+											expire_after=None)
 
-    return response_dict
+	response = session.get(url, headers=headers, params=querystring)
+
+	response_dict = response.json()
+
+	return response_dict
 
 
 def main():
