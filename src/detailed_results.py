@@ -75,13 +75,20 @@ def is_good_school(results: Dict,
     schools = results.schools
     ratings = [x.rating for x in schools]
     logger.info(f"ratings are {ratings}")
-    names = [x.name for x in schools]
     
     if min(ratings) < min_rating:
         logger.info(f"School rating for {results.zpid} lower than {min_rating}")
         return False
     
-    if bool(set(desired_schools) & set(names)):
+    # Flag if desired school is in the list
+    school_flag = False
+    for desired_school in desired_schools:
+        for name in schools:
+            if desired_school.lower() in name.name.lower():
+                school_flag = True
+    
+    # if not bool(set(desired_schools) & set(names)):
+    if not school_flag:
         logger.info(f"{results.zpid} Does not have the desired school {desired_schools}")
         return False
     

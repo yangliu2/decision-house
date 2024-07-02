@@ -88,6 +88,10 @@ def display_page() -> Dict:
                            min_school_rating=int(data['min_school_rating']),
                            desired_school=data['school_name'])
 
+        if not houses:
+            st.write("We did not find any house that fit the criteria. "
+                     "Please make a wider search.")
+
         for house in houses:
             st.markdown(f"[{house}]({house})")
     return data
